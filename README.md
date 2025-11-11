@@ -17,8 +17,7 @@ Pod 재배치를 수행함으로써 클러스터의 전체 성능을 향상시�
 
 | 폴더/파일              | 설명                                                     |
 | ------------------ | ------------------------------------------------------ |
-| `main.py` | 리스케줄링 실험의 메인 제어 스크립트.
-모든 라운드(round)를 순차적으로 수행하며, podmonitor, harzard_detect, delete_replaced_pod, rescheduling 모듈을 호출하여 노드 모니터링 → 위험 노드 탐지 → 파드 삭제 → 재배치 알고리즘 실행 순으로 진행           |
+| `main.py` | 리스케줄링 실험의 메인 제어 스크립트. 모든 라운드(round)를 순차적으로 수행하며, podmonitor, harzard_detect, delete_replaced_pod, rescheduling 모듈을 호출하여 노드 모니터링 → 위험 노드 탐지 → 파드 삭제 → 재배치 알고리즘 실행 순으로 진행           |
 | `podmonitor.py`   | Kubernetes Metrics API를 통해 노드별 및 파드별 CPU·메모리 사용량을 수집하여, 클러스터 전체의 상태를 딕셔너리(cluster_monitoring)로 구성해 리스케줄러에 전달         |
 | `harzard_detect.py` | 모니터링 데이터(cpu_pct)를 기반으로 임계치 이상으로 부하가 걸린 노드를 탐지하고, 그중 CPU 사용률이 가장 높은 노드를 재배치 대상(hazard node) 으로 선정 |
 | `delete_replaced_pod.py`   | 과부하 노드에서 가장 CPU 사용량이 높은 파드를 찾아 해당 파드의 Deployment를 삭제 및 재생성할 준비. Pod → ReplicaSet → Deployment 의 소유 관계를 추적하여 Deployment 정보를 추출하고, 삭제 후 Deployment가 완전히 사라질 때까지 대기 |
